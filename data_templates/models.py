@@ -57,13 +57,13 @@ class DataTemplateTagsRelative(models.Model):
 
 
 class Dictionary(models.Model):
-    word_code = models.CharField(max_length=255, db_comment='�\x8d�\x9d�编�\x8f�')
-    word_name = models.CharField(max_length=255, db_comment='�\xad文�\x90\x8d称')
-    word_eng = models.CharField(max_length=255, blank=True, null=True, db_comment='英文�\x90\x8d称')
+    word_code = models.CharField(max_length=255, db_comment='词汇编码')
+    word_name = models.CharField(max_length=255, db_comment='词汇名称')
+    word_eng = models.CharField(max_length=255, blank=True, null=True, db_comment='英文名称')
     word_short = models.CharField(max_length=255, blank=True, null=True, db_comment='英文缩写')
-    word_class = models.CharField(max_length=255, db_comment='�\x8d�\x9d�类型')
-    word_apply = models.CharField(max_length=255, db_comment='�\x8d�\x9d�应用')
-    word_belong = models.CharField(max_length=255, blank=True, null=True, db_comment='从属别�\x90\x8d')
+    word_class = models.CharField(max_length=255, db_comment='词汇类型')
+    word_apply = models.CharField(max_length=255, db_comment='词汇应用')
+    word_belong = models.CharField(max_length=255, blank=True, null=True, db_comment='从属类别')
 
     class Meta:
         managed = False
