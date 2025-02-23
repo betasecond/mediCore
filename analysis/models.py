@@ -33,9 +33,9 @@ class AnalysisTable(models.Model):
     since_start = models.DateField()
     since_end = models.DateField()
     data_template_id = models.IntegerField()
-    constraint = models.CharField(max_length=255, blank=True, null=True, db_comment='约�\x9d��\x9d�件')
-    load_times = models.DateTimeField(blank=True, null=True, db_comment='数�\x8d��\xa0载次数')
-    last_load_date = models.DateTimeField(blank=True, null=True, db_comment='最�\x90��\xa0载时间')
+    constraint = models.CharField(max_length=255, blank=True, null=True, db_comment='约束条件')
+    load_times = models.DateTimeField(blank=True, null=True, db_comment='数据加载次数')
+    last_load_date = models.DateTimeField(blank=True, null=True, db_comment='最后加载时间')
 
     class Meta:
         managed = False
@@ -45,12 +45,12 @@ class Charts(models.Model):
     id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=255)
     type = models.CharField(max_length=255)
-    analysis_sheet_id = models.IntegerField(db_comment='数�\x8d��\x90')
+    analysis_sheet_id = models.IntegerField(db_comment='分析表引用外键')
     selected_cases = models.CharField(max_length=255)
     selected_attrs = models.CharField(max_length=255)
-    mapping = models.CharField(max_length=255, db_comment='数�\x8d��\xa0射，�\xad�JSON')
-    axis = models.CharField(max_length=255, db_comment='�\x9d\x90�\xa0�轴，�\xad�JSON')
-    options = models.CharField(max_length=255, db_comment='常规�\x8d置，�\xad�JSON')
+    mapping = models.CharField(max_length=255, db_comment='数据映射，存储为JSON')
+    axis = models.CharField(max_length=255, db_comment='坐标轴，存储为JSON')
+    options = models.CharField(max_length=255, db_comment='常规设置，存储为JSON')
 
     class Meta:
         managed = False
