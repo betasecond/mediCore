@@ -1,0 +1,243 @@
+{
+  "info": {
+    "name": "MediCore API",
+    "_postman_id": "87654321-4321-4321-4321-210987654321",
+    "descriptionschema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();",
+                  "pm.environment.set('access_token', response.access);",
+                  "pm.environment.set('refresh_token', response.refresh);",
+                  "pm.test('Registration successful', function() {",
+                  "    pm.response.to.have.status(201);",
+                  "    pm.expect(response).to.have.property('access');",
+                  "    pm.expect(response).to.have.property('refresh');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"testpassword123\",\n    \"email\": \"test@example.com\"\n}"
+            },
+            "url": "{{baseUrl}}/register/"
+          }
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();",
+                  "pm.environment.set('access_token', response.access);",
+                  "pm.environment.set('refresh_token', response.refresh);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"testpassword123\"\n}"
+            },
+            "url": "{{baseUrl}}/login/"
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();",
+                  "pm.environment.set('access_token', response.access);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n}"
+            },
+            "url": "{{baseUrl}}/token/refresh/"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Data Templates",
+      "item": [
+        {
+          "name": "Create Data Template",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Test Template\",\n    \"description\": \"Test Description\",\n    \"category_id\": 1,\n    \"used_n\": 0\n}"
+            },
+            "url": "{{baseUrl}}/data-templates/create/"
+          }
+        },
+        {
+          "name": "Get Data Templates List",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": "{{baseUrl}}/data-templates/"
+          }
+        },
+        {
+          "name": "Get Data Template Details",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": "{{baseUrl}}/data-templates/:templateId/"
+          }
+        },
+        {
+          "name": "Update Data Template",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Updated Template\",\n    \"description\": \"Updated Description\",\n    \"category_id\": 1,\n    \"used_n\": 1\n}"
+            },
+            "url": "{{baseUrl}}/data-templates/:templateId/update/"
+          }
+        },
+        {
+          "name": "Delete Data Template",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "url": "{{baseUrl}}/data-templates/:templateId/delete/"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000/api",
+      "type": "string"
+    }
+  ],
+  "environment": {
+    "name": "Development Environment",
+    "_postman_variable_scope": "environment",
+    "values": [
+      {
+        "key": "access_token",
+        "value": "",
+        "enabled": true,
+        "type": "string"
+      },
+      {
+        "key": "refresh_token",
+        "value": "",
+        "enabled": true,
+        "type": "string"
+      }
+    ]
+  }
+}

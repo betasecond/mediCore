@@ -276,30 +276,6 @@ CREATE TABLE `text`  (
   PRIMARY KEY (`id`)
 );
 
-ALTER TABLE `analysis_sheet` ADD CONSTRAINT `fk_analysis_sheet__table` FOREIGN KEY (`analysis_table_id`) REFERENCES `analysis_table` (`id`);
-ALTER TABLE `analysis_sheet_detail` ADD CONSTRAINT `fk_detail_analysis_sheet` FOREIGN KEY (`analysis_sheet_id`) REFERENCES `analysis_sheet` (`id`);
-ALTER TABLE `analysis_table` ADD CONSTRAINT `fk_analysis_table_to_template` FOREIGN KEY (`data_template_id`) REFERENCES `data_template` (`id`);
-ALTER TABLE `archive_case_relative` ADD CONSTRAINT `fk_archive_relative_case` FOREIGN KEY (`case_id`) REFERENCES `cases` (`case_id`);
-ALTER TABLE `archive_case_relative` ADD CONSTRAINT `fk_archive_case_relative_archive_relative_archive` FOREIGN KEY (`archive_id`) REFERENCES `archive` (`arcive_id`);
-ALTER TABLE `base_info` ADD CONSTRAINT `fk_base_info_case` FOREIGN KEY (`case_id`) REFERENCES `cases` (`case_id`);
-ALTER TABLE `cases` ADD CONSTRAINT `fk_case_identity` FOREIGN KEY (`identity_id`) REFERENCES `identity` (`identity_id`);
-ALTER TABLE `charts` ADD CONSTRAINT `fk_charts_analysis_sheet` FOREIGN KEY (`analysis_sheet_id`) REFERENCES `analysis_sheet` (`id`);
-ALTER TABLE `clinical_info` ADD CONSTRAINT `fk_clinical_info_cases_1` FOREIGN KEY (`case_id`) REFERENCES `cases` (`case_id`);
-ALTER TABLE `data_table` ADD CONSTRAINT `fk_data_table_cases` FOREIGN KEY (`case_id`) REFERENCES `cases` (`case_id`);
-ALTER TABLE `data_table` ADD CONSTRAINT `fk_data_table_to_template` FOREIGN KEY (`data_template_id`) REFERENCES `data_template` (`id`);
-ALTER TABLE `data_template` ADD CONSTRAINT `fk_data_template_category` FOREIGN KEY (`category_id`) REFERENCES `data_template_category` (`id`);
-ALTER TABLE `data_template_details` ADD CONSTRAINT `fk_details_data_template` FOREIGN KEY (`data_template_id`) REFERENCES `data_template` (`id`);
-ALTER TABLE `data_template_tags_relative` ADD CONSTRAINT `fk_tags_relative_data_template` FOREIGN KEY (`template_id`) REFERENCES `data_template` (`id`);
-ALTER TABLE `data_template_tags_relative` ADD CONSTRAINT `fk_tags_relative_tags` FOREIGN KEY (`tag_id`) REFERENCES `data_template_tags` (`id`);
-ALTER TABLE `document_chart` ADD CONSTRAINT `fk_document_relative_chart` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`);
-ALTER TABLE `document_chart` ADD CONSTRAINT `fk_chart_relative_document` FOREIGN KEY (`chart_id`) REFERENCES `charts` (`id`);
-ALTER TABLE `examination_images` ADD CONSTRAINT `fk_examination_images_sheet` FOREIGN KEY (`examination_sheet_id`) REFERENCES `examination_sheet` (`id`);
-ALTER TABLE `examination_sheet` ADD CONSTRAINT `fk_examination_sheet_data_table` FOREIGN KEY (`data_table_id`) REFERENCES `data_table` (`id`);
-ALTER TABLE `image` ADD CONSTRAINT `fk_image_document` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`);
-ALTER TABLE `shape` ADD CONSTRAINT `fk_shape_document` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`);
-ALTER TABLE `testing_sheet` ADD CONSTRAINT `fk_testing_sheet_data_table` FOREIGN KEY (`data_table_id`) REFERENCES `data_table` (`id`);
-ALTER TABLE `text` ADD CONSTRAINT `fk_text_document` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`);
-
 -- sd
 
 -- 日志记录

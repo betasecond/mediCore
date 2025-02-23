@@ -1,0 +1,48 @@
+{
+  "info": {
+    "name": "MediCore API",
+    "_postman_id": "87654321-4321-4321-4321-210987654321",
+    "description": "Collection for Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();",
+                  "pm.environment.set('access_token', response.access);",
+                  "pm.environment.set('refresh_token', response.refresh);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"testpassword123\",\n    \"email\": \"test@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/register/",
+              "host": ["{{baseUrl}}"],
+              "path": ["register", ""]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
