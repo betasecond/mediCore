@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 class AnalysisSheet(models.Model):
     id = models.IntegerField(primary_key=True)
-    analysis_table = models.ForeignKey('AnalysisTable', models.DO_NOTHING, db_comment='分�\x90表引用外键')
-    sheet_code = models.CharField(max_length=255, db_comment='�\x8f机生�\x90')
+    analysis_table = models.ForeignKey('AnalysisTable', models.DO_NOTHING, db_comment='分析表引用外键')
+    sheet_code = models.CharField(max_length=255, db_comment='随机生成')
     sheet_name = models.CharField(max_length=255)
     remark = models.CharField(max_length=255, blank=True, null=True)
 

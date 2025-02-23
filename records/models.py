@@ -95,8 +95,8 @@ class Image(models.Model):
     height = models.FloatField()
     width = models.FloatField()
     is_stroke = models.IntegerField()
-    stroke_weight = models.FloatField(db_comment='�\x8f\x8f边粗细')
-    stroke_color = models.CharField(max_length=255, db_comment='�\x8f\x8f边颜色')
+    stroke_weight = models.FloatField(db_comment='描边粗细')
+    stroke_color = models.CharField(max_length=255, db_comment='描边颜色')
 
     class Meta:
         managed = False
@@ -113,8 +113,8 @@ class Shape(models.Model):
     is_fill = models.IntegerField()
     fill_color = models.CharField(max_length=255, db_comment='填充颜色')
     is_stroke = models.IntegerField()
-    stroke_color = models.CharField(max_length=255, db_comment='�\x8f\x8f边颜色')
-    path = models.CharField(max_length=255, db_comment='点集，�\xad�JSON')
+    stroke_color = models.CharField(max_length=255, db_comment='描边颜色')
+    path = models.CharField(max_length=255, db_comment='点集，存储为JSON')
 
     class Meta:
         managed = False
