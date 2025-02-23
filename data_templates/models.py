@@ -23,7 +23,7 @@ class DataTemplateCategory(models.Model):
 
 class DataTemplateDetails(models.Model):
     id = models.IntegerField(primary_key=True)
-    data_template_id = models.IntegerField(db_comment='模�\x9d�外键')
+    data_template_id = models.IntegerField(db_comment='模板外键')
     item_name = models.CharField(max_length=255)
     item_name_code = models.CharField(max_length=255)
     category_name = models.CharField(max_length=255)
