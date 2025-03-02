@@ -10,6 +10,10 @@ class ArchiveCaseRelativeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ArchiveCaseRelative
         fields = '__all__'
+        extra_kwargs = {
+            'id': {'read_only': False},  # 允许客户端传入ID
+            'archive_id': {'required': True}  # 确保复合主键字段必填
+        }
 
 class BaseInfoSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,7 +1,6 @@
 from django.shortcuts import render
 
 # Create your views here.
-# records/views.py
 from rest_framework import generics
 from .models import DataTable, ExaminationImages, ExaminationSheet, TestingSheet, DocumentChart, Documents, Image, Shape, Text
 from .serializers import (

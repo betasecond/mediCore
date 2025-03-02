@@ -116,6 +116,14 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'core.renderers.UnifiedJSONRenderer',  # 自定义渲染器
+    ),
+    'EXCEPTION_HANDLER': 'core.exceptions.custom_exception_handler',
+    # 分页配置
+    'DEFAULT_PAGINATION_CLASS': 'core.pagination.StandardPagination',
+    'PAGE_SIZE': 10,
+
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
