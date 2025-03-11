@@ -4,11 +4,17 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-
-from .serializers import UserSerializer
+from drf_yasg.utils import swagger_auto_schema
+from .serializers import UserSerializer, LoginSerializer
 
 class RegisterView(APIView):
     permission_classes = [AllowAny]
+
+    @swagger_auto_schema(
+        request_body=UserSerializer,  # 显式关联序列化器
+        operation_description="注册新用户",
+        responses={201: UserSerializer, 400: "无效数据"}
+    )
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -23,6 +29,12 @@ class RegisterView(APIView):
 
 class LoginView(APIView):
     permission_classes = [AllowAny]
+
+    @swagger_auto_schema(
+        request_body=LoginSerializer,  # 直接使用序列化器（推荐）
+        operation_description="用户登录",
+        responses={200: "Token", 401: "无效凭证"}
+    )
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
