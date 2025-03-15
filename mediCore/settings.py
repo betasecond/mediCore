@@ -43,14 +43,21 @@ INSTALLED_APPS = [
     'records',
     'drf_yasg',
     'accounts',
+    'corsheaders',
 ]
-
+# 配置 CORS
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5431",
+    "http://127.0.0.1:5431"
+]
+# 配置跨域白名单
+CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS.copy()
+# CORS_ALLOW_CREDENTIALS = True  # 允许携带 Cookie
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # todo :测试的时候先禁用掉
-    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

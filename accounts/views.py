@@ -6,8 +6,15 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from drf_yasg.utils import swagger_auto_schema
 from .serializers import UserSerializer, LoginSerializer
+from rest_framework.authentication import SessionAuthentication
+
+class CsrfExemptSessionAuthentication(SessionAuthentication):
+
+    def enforce_csrf(self, request):
+        return  # To not perform the csrf check previously happening
 
 class RegisterView(APIView):
+    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
@@ -28,6 +35,7 @@ class RegisterView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
+    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
