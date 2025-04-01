@@ -35,7 +35,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      DJANGO_SETTINGS_MODULE: "medicore.settings"
+      DJANGO_SETTINGS_MODULE: "mediCore.settings"
       DATABASE_URL: "mysql://mediCore:bWVkaUNvcmU=@db:3306/medical_data"
     volumes:
       - .:/app
