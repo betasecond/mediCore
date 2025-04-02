@@ -37,10 +37,7 @@ class RegisterView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
-
-
-
-
+    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     permission_classes = [AllowAny]
     renderer_classes = [UnifiedJSONRenderer]  # 指定使用自定义渲染器
