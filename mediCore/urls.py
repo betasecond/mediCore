@@ -19,7 +19,6 @@ from django.urls import path, include
 from django.urls import path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
-from rest_framework.decorators import permission_classes
 
 from analysis.views import (
     AnalysisSheetListView, AnalysisSheetDetailView, AnalysisSheetCreateView,
@@ -27,7 +26,7 @@ from analysis.views import (
 )
 from data_templates.views import (
     DataTemplateListView, DataTemplateDetailView, DataTemplateCreateView,
-    DataTemplateUpdateView, DataTemplateDeleteView
+    DataTemplateUpdateView, DataTemplateDeleteView, DictionaryListCreateView, DictionaryDetailView
 )
 from records.views import (
     DataTableListCreateView, DataTableDetailView, ExaminationImagesListCreateView, ExaminationImagesDetailView,
@@ -42,8 +41,8 @@ from patients.views import (
 )
 schema_view = get_schema_view(
    openapi.Info(
+      default_version="1.0",
       title="Your API",
-      default_version='v1',
       description="Test description",
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="contact@yourapi.local"),
@@ -69,7 +68,8 @@ api_patterns = [
     path('data-templates/create/', DataTemplateCreateView.as_view(), name='data_template_create'),
     path('data-templates/<int:pk>/update/', DataTemplateUpdateView.as_view(), name='data_template_update'),
     path('data-templates/<int:pk>/delete/', DataTemplateDeleteView.as_view(), name='data_template_delete'),
-
+    path('dictionary/', DictionaryListCreateView.as_view(), name='dictionary-list-create'),
+    path('dictionary/<int:pk>/', DictionaryDetailView.as_view(), name='dictionary-detail'),
     path('data-tables/', DataTableListCreateView.as_view(), name='data_table_list_create'),
     path('data-tables/<int:pk>/', DataTableDetailView.as_view(), name='data_table_detail'),
     path('examination-images/', ExaminationImagesListCreateView.as_view(), name='examination_images_list_create'),
@@ -103,6 +103,7 @@ api_patterns = [
     path('identity/<int:pk>/', IdentityDetailView.as_view(), name='identity_detail'),
 
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('swagger/?format=openapi', schema_view.without_ui(cache_timeout=0), name='schema-openapi'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('openapi.json', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('register/', RegisterView.as_view(), name='register'),

@@ -57,16 +57,20 @@ class DataTemplateTagsRelative(models.Model):
 
 
 class Dictionary(models.Model):
-    word_code = models.CharField(max_length=255, db_comment='词汇编码')
-    word_name = models.CharField(max_length=255, db_comment='词汇名称')
+    id = models.AutoField(primary_key=True)  # 增加自动增长的主键id
+    word_code = models.CharField(max_length=255, unique=True, db_comment='词条编号')
+    word_name = models.CharField(max_length=255, db_comment='中文名称')
     word_eng = models.CharField(max_length=255, blank=True, null=True, db_comment='英文名称')
     word_short = models.CharField(max_length=255, blank=True, null=True, db_comment='英文缩写')
-    word_class = models.CharField(max_length=255, db_comment='词汇类型')
-    word_apply = models.CharField(max_length=255, db_comment='词汇应用')
-    word_belong = models.CharField(max_length=255, blank=True, null=True, db_comment='从属类别')
+    word_class = models.CharField(max_length=255, db_comment='词条类型')
+    word_apply = models.CharField(max_length=255, db_comment='词条应用')
+    word_belong = models.CharField(max_length=255, blank=True, null=True, db_comment='从属别名')
 
     class Meta:
-        managed = False
         db_table = 'dictionary'
-        unique_together = (('id', 'word_code'),)
+        indexes = [
+            models.Index(fields=['word_name'], name='name_index'),
+        ]
 
+    def __str__(self):
+        return self.word_name
