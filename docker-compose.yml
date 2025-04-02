@@ -1,3 +1,4 @@
+#本地开发环境
 services:
   db:
     image: mysql:8.2
@@ -16,26 +17,3 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  nginx:
-    image: nginx:latest
-    container_name: medical_nginx
-    depends_on:
-      - web
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-
-  web:
-    build: .
-    container_name: medical_django
-    ports:
-      - "8000:8000"
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      DJANGO_SETTINGS_MODULE: "mediCore.settings"
-      DATABASE_URL: "mysql://mediCore:bWVkaUNvcmU=@db:3306/medical_data"
-    volumes:
-      - .:/app

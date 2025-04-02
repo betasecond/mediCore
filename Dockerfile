@@ -18,5 +18,12 @@ RUN poetry config virtualenvs.create false && poetry install  --no-root --no-int
 # 复制 Django 项目代码
 COPY . .
 
+
 # 运行 Django 服务器（可根据需要修改）
 CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+COPY startup.sh /app/
+RUN chmod +x /app/startup.sh
+
+# 使用脚本启动容器
+CMD ["/app/startup.sh"]
