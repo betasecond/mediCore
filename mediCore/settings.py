@@ -86,21 +86,21 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-# 生产环境
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'medical_data',
-        'USER': 'mediCore',
-        'PASSWORD': 'bWVkaUNvcmU=',
-        'HOST': 'db',  # Docker 服务名
-        'PORT': '3306',  # Docker MySQL 端口
-    }
-}
-#生产环境
-ALLOWED_HOSTS = [
-    '118.89.187.153'
-    ]
+# # 生产环境
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'medical_data',
+#         'USER': 'mediCore',
+#         'PASSWORD': 'bWVkaUNvcmU=',
+#         'HOST': 'db',  # Docker 服务名
+#         'PORT': '3306',  # Docker MySQL 端口
+#     }
+# }
+# #生产环境
+# ALLOWED_HOSTS = [
+#     '118.89.187.153'
+#     ]
 
 # #本地开发环境
 DATABASES = {
