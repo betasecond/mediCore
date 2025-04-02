@@ -25,8 +25,6 @@ SECRET_KEY = 'django-insecure-2u44@sl(12rleofhh^tdr))18@!3xk*yd8ra(ui9z$(=s4muu^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -87,29 +85,24 @@ WSGI_APPLICATION = 'mediCore.wsgi.application'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+# 生产环境
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'medical_data',
+        'USER': 'mediCore',
+        'PASSWORD': 'bWVkaUNvcmU=',
+        'HOST': 'db',  # Docker 服务名
+        'PORT': '3306',  # Docker MySQL 端口
+    }
+}
+#生产环境
+ALLOWED_HOSTS = [
+    '118.89.187.153'
+    ]
 
-# 正常使用 没有root权限
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'medical_data',
-#         'USER': 'mediCore',
-#         'PASSWORD': 'bWVkaUNvcmU=',
-#         'HOST': 'localhost',  # 通常是 'localhost' 或 '127.0.0.1'
-#         'PORT': '23336',  # 默认 MySQL 端口
-#     }
-# }
-
-# 开发使用 root权限
+# #本地开发环境
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -120,6 +113,9 @@ DATABASES = {
         'PORT': '23336',  # 默认 MySQL 端口
     }
 }
+#本地开发环境
+ALLOWED_HOSTS = []
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 REST_FRAMEWORK = {
