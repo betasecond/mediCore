@@ -22,11 +22,9 @@ class DictionaryDetailView(generics.RetrieveUpdateDestroyAPIView):
 # 数据模板增删改查
 
 class DataTemplatesListCreateView(generics.ListCreateAPIView):
-    """获取所有词条 & 创建新词条"""
     queryset = DataTemplate.objects.all()
     serializer_class = DataTemplatesSerializer
 
 class DataTemplatesDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """获取、更新或删除指定 ID 的词条"""
     queryset = DataTemplate.objects.all()
     serializer_class = DataTemplatesSerializer
