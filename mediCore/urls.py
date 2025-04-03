@@ -21,11 +21,11 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 
 from analysis.views import (
-    AnalysisSheetListView, AnalysisSheetDetailView, AnalysisSheetCreateView,
-    AnalysisSheetUpdateView, AnalysisSheetDeleteView
+    AnalysisSheetDetailView, AnalysisSheetListCreateView,
+
 )
 from data_templates.views import (
-    DictionaryListCreateView, DictionaryDetailView
+    DictionaryListCreateView, DictionaryDetailView, DataTemplatesListCreateView, DataTemplatesDetailView
 )
 from records.views import (
     DataTableListCreateView, DataTableDetailView, ExaminationImagesListCreateView, ExaminationImagesDetailView,
@@ -56,13 +56,10 @@ from rest_framework_simplejwt.views import (
 from accounts.views import RegisterView, LoginView
 
 api_patterns = [
-    path('analysis-sheets/', AnalysisSheetListView.as_view(), name='analysis_sheet_list'),
-    path('analysis-sheets/<int:pk>/', AnalysisSheetDetailView.as_view(), name='analysis_sheet_detail'),
-    path('analysis-sheets/create/', AnalysisSheetCreateView.as_view(), name='analysis_sheet_create'),
-    path('analysis-sheets/<int:pk>/update/', AnalysisSheetUpdateView.as_view(), name='analysis_sheet_update'),
-    path('analysis-sheets/<int:pk>/delete/', AnalysisSheetDeleteView.as_view(), name='analysis_sheet_delete'),
-    path('data-templates//', DictionaryListCreateView.as_view(), name='dictionary-list-create'),
-    path('data-templates//<int:pk>/', DictionaryDetailView.as_view(), name='dictionary-detail'),
+    path('analysis-sheet/', AnalysisSheetListCreateView.as_view(), name='analysis-sheet-create'),
+    path('analysis-sheet//<int:pk>/', AnalysisSheetDetailView.as_view(), name='analysis-sheet-detail'),
+    path('data-templates/', DataTemplatesListCreateView.as_view(), name='data-templates-list-create'),
+    path('data-templates//<int:pk>/', DataTemplatesDetailView.as_view(), name='data-templates-detail'),
     path('dictionary/', DictionaryListCreateView.as_view(), name='dictionary-list-create'),
     path('dictionary/<int:pk>/', DictionaryDetailView.as_view(), name='dictionary-detail'),
     path('data-tables/', DataTableListCreateView.as_view(), name='data_table_list_create'),

@@ -1,0 +1,2 @@
+ALTER TABLE `analysis_sheet`
+MODIFY `id` INT NOT NULL AUTO_INCREMENT;

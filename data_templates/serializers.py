@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-import data_templates
-from .models import Dictionary
+
+from .models import Dictionary,DataTemplate
 
 class DictionarySerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,5 +9,5 @@ class DictionarySerializer(serializers.ModelSerializer):
         fields = '__all__'
 class DataTemplatesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = data_templates
+        model = DataTemplate
         fields = '__all__'

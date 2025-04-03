@@ -1,17 +1,34 @@
 from django.db import models
 
 # Create your models here.
+# class AnalysisSheet(models.Model):
+#     id = models.IntegerField(primary_key=True)
+#     analysis_table = models.ForeignKey('AnalysisTable', models.DO_NOTHING, db_comment='分析表引用外键')
+#     sheet_code = models.CharField(max_length=255, db_comment='随机生成')
+#     sheet_name = models.CharField(max_length=255)
+#     remark = models.CharField(max_length=255, blank=True, null=True)
+#
+#     class Meta:
+#         managed = False
+#         db_table = 'analysis_sheet'
+
+
+
 class AnalysisSheet(models.Model):
-    id = models.IntegerField(primary_key=True)
-    analysis_table = models.ForeignKey('AnalysisTable', models.DO_NOTHING, db_comment='分析表引用外键')
-    sheet_code = models.CharField(max_length=255, db_comment='随机生成')
-    sheet_name = models.CharField(max_length=255)
-    remark = models.CharField(max_length=255, blank=True, null=True)
+    id = models.AutoField(primary_key=True)  # 自动增长的主键id
+    analysis_table_id = models.IntegerField(db_comment='分析表引用外键')  # 外键引用（根据需要可做外键关联）
+    sheet_code = models.CharField(max_length=255, db_comment='随机生成')  # 随机生成的sheet code
+    sheet_name = models.CharField(max_length=255, db_comment='sheet名称')  # sheet名称
+    remark = models.CharField(max_length=255, blank=True, null=True, db_comment='备注')  # 备注，允许为空
 
     class Meta:
-        managed = False
         db_table = 'analysis_sheet'
+        indexes = [
+            models.Index(fields=['sheet_name'], name='sheet_name_index'),  # 创建sheet_name索引
+        ]
 
+    def __str__(self):
+        return self.sheet_name
 
 class AnalysisSheetDetail(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -55,3 +72,6 @@ class Charts(models.Model):
     class Meta:
         managed = False
         db_table = 'charts'
+
+
+

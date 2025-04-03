@@ -45,8 +45,8 @@ INSTALLED_APPS = [
 ]
 # 配置 CORS
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5371",
-    "http://127.0.0.1:5371"
+    "http://localhost:5431",
+    "http://127.0.0.1:5431"
 ]
 # 配置跨域白名单
 CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS.copy()
