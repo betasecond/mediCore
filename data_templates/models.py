@@ -1,59 +1,21 @@
 from django.db import models
 
-# Create your models here.
 class DataTemplate(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
+    id = models.AutoField(primary_key=True)  # 自动增长的主键id
+    name = models.CharField(max_length=255, db_comment='模板名称')
+    description = models.TextField(blank=True, null=True, db_comment='描述')
     category_id = models.IntegerField(db_comment='类型外键引用')
     used_n = models.IntegerField(db_comment='被使用次数')
 
     class Meta:
-        managed = False
         db_table = 'data_template'
+        indexes = [
+            models.Index(fields=['name'], name='data_template_name_index'),  # 修改索引名称
+        ]
 
+    def __str__(self):
+        return self.name
 
-class DataTemplateCategory(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255)
-
-    class Meta:
-        managed = False
-        db_table = 'data_template_category'
-
-
-class DataTemplateDetails(models.Model):
-    id = models.IntegerField(primary_key=True)
-    data_template_id = models.IntegerField(db_comment='模板外键')
-    item_name = models.CharField(max_length=255)
-    item_name_code = models.CharField(max_length=255)
-    category_name = models.CharField(max_length=255)
-    category_name_code = models.CharField(max_length=255)
-    type_name = models.CharField(max_length=255)
-    type_name_code = models.CharField(max_length=255)
-    order_index = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'data_template_details'
-
-
-class DataTemplateTags(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255)
-
-    class Meta:
-        managed = False
-        db_table = 'data_template_tags'
-
-
-class DataTemplateTagsRelative(models.Model):
-    id = models.IntegerField(primary_key=True)
-    template_id = models.IntegerField()
-    tag_id = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'data_template_tags_relative'
 
 
 class Dictionary(models.Model):

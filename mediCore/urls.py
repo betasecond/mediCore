@@ -25,8 +25,7 @@ from analysis.views import (
     AnalysisSheetUpdateView, AnalysisSheetDeleteView
 )
 from data_templates.views import (
-    DataTemplateListView, DataTemplateDetailView, DataTemplateCreateView,
-    DataTemplateUpdateView, DataTemplateDeleteView, DictionaryListCreateView, DictionaryDetailView
+    DictionaryListCreateView, DictionaryDetailView
 )
 from records.views import (
     DataTableListCreateView, DataTableDetailView, ExaminationImagesListCreateView, ExaminationImagesDetailView,
@@ -62,12 +61,8 @@ api_patterns = [
     path('analysis-sheets/create/', AnalysisSheetCreateView.as_view(), name='analysis_sheet_create'),
     path('analysis-sheets/<int:pk>/update/', AnalysisSheetUpdateView.as_view(), name='analysis_sheet_update'),
     path('analysis-sheets/<int:pk>/delete/', AnalysisSheetDeleteView.as_view(), name='analysis_sheet_delete'),
-
-    path('data-templates/', DataTemplateListView.as_view(), name='data_template_list'),
-    path('data-templates/<int:pk>/', DataTemplateDetailView.as_view(), name='data_template_detail'),
-    path('data-templates/create/', DataTemplateCreateView.as_view(), name='data_template_create'),
-    path('data-templates/<int:pk>/update/', DataTemplateUpdateView.as_view(), name='data_template_update'),
-    path('data-templates/<int:pk>/delete/', DataTemplateDeleteView.as_view(), name='data_template_delete'),
+    path('data-templates//', DictionaryListCreateView.as_view(), name='dictionary-list-create'),
+    path('data-templates//<int:pk>/', DictionaryDetailView.as_view(), name='dictionary-detail'),
     path('dictionary/', DictionaryListCreateView.as_view(), name='dictionary-list-create'),
     path('dictionary/<int:pk>/', DictionaryDetailView.as_view(), name='dictionary-detail'),
     path('data-tables/', DataTableListCreateView.as_view(), name='data_table_list_create'),
