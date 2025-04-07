@@ -1,10 +1,22 @@
 from django.db import models
 
+class DataTemplateCategory(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'data_template_category'
+
+    def __str__(self):
+        return self.name
+
 class DataTemplate(models.Model):
     id = models.AutoField(primary_key=True)  # 自动增长的主键id
     name = models.CharField(max_length=255, db_comment='模板名称')
     description = models.TextField(blank=True, null=True, db_comment='描述')
-    category_id = models.IntegerField(db_comment='类型外键引用')
+    # 指定 db_column 对应数据库中的字段名称
+    category = models.ForeignKey(DataTemplateCategory, on_delete=models.CASCADE, db_column='category_id',
+                                 verbose_name='类型外键引用')
     used_n = models.IntegerField(db_comment='被使用次数')
 
     class Meta:

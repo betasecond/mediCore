@@ -25,7 +25,8 @@ from analysis.views import (
 
 )
 from data_templates.views import (
-    DictionaryListCreateView, DictionaryDetailView, DataTemplatesListCreateView, DataTemplatesDetailView
+    DictionaryListCreateView, DictionaryDetailView, DataTemplatesListCreateView, DataTemplatesDetailView,
+    DataTemplateCategoryListCreateView, DataTemplateCategoryDetailView
 )
 from records.views import (
     DataTableListCreateView, DataTableDetailView, ExaminationImagesListCreateView, ExaminationImagesDetailView,
@@ -60,6 +61,8 @@ api_patterns = [
     path('analysis-sheet//<int:pk>/', AnalysisSheetDetailView.as_view(), name='analysis-sheet-detail'),
     path('data-templates/', DataTemplatesListCreateView.as_view(), name='data-templates-list-create'),
     path('data-templates//<int:pk>/', DataTemplatesDetailView.as_view(), name='data-templates-detail'),
+path('categories/', DataTemplateCategoryListCreateView.as_view(), name='category-list-create'),
+    path('categories/<int:pk>/', DataTemplateCategoryDetailView.as_view(), name='category-detail'),
     path('dictionary/', DictionaryListCreateView.as_view(), name='dictionary-list-create'),
     path('dictionary/<int:pk>/', DictionaryDetailView.as_view(), name='dictionary-detail'),
     path('data-tables/', DataTableListCreateView.as_view(), name='data_table_list_create'),
