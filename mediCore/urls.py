@@ -37,7 +37,7 @@ from records.views import (
 from patients.views import (
     ArchiveListCreateView, ArchiveDetailView, ArchiveCaseRelativeListCreateView, ArchiveCaseRelativeDetailView,
     BaseInfoListCreateView, BaseInfoDetailView, CasesListCreateView, CasesDetailView,
-    ClinicalInfoListCreateView, ClinicalInfoDetailView, IdentityListCreateView, IdentityDetailView
+    ClinicalInfoListCreateView, ClinicalInfoDetailView, IdentityListCreateView, IdentityDetailView, GenderCountView
 )
 schema_view = get_schema_view(
    openapi.Info(
@@ -96,7 +96,7 @@ path('categories/', DataTemplateCategoryListCreateView.as_view(), name='category
     path('clinical-info/<int:pk>/', ClinicalInfoDetailView.as_view(), name='clinical_info_detail'),
     path('identity/', IdentityListCreateView.as_view(), name='identity_list_create'),
     path('identity/<int:pk>/', IdentityDetailView.as_view(), name='identity_detail'),
-
+path('gender-count/', GenderCountView.as_view(), name='gender-count'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('swagger/?format=openapi', schema_view.without_ui(cache_timeout=0), name='schema-openapi'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
