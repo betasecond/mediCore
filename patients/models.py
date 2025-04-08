@@ -1,4 +1,10 @@
 from django.db import models
+from utils.snowflake import Snowflake
+
+snowflake = Snowflake(datacenter_id=1, worker_id=1)
+
+def generate_snowflake_id():
+    return snowflake.get_id()
 
 # Create your models here.
 class Archive(models.Model):
@@ -40,7 +46,7 @@ class BaseInfo(models.Model):
 
 
 class Cases(models.Model):
-    id = models.IntegerField(primary_key=True)  # The composite primary key (id, case_id) found, that is not supported. The first column is selected.
+    id = models.BigIntegerField(primary_key=True, default=generate_snowflake_id, editable=False)
     case_id = models.CharField(max_length=255)
     identity_id = models.CharField(max_length=255)
     inhospital_id = models.CharField(max_length=255, blank=True, null=True, db_comment='住院')

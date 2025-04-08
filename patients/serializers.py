@@ -21,6 +21,7 @@ class BaseInfoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CasesSerializer(serializers.ModelSerializer):
+    id = serializers.CharField(read_only=True)  # 强制将 ID 作为字符串返回 解决精度丢失问题(实际返回和swagger界面显示的id不一致问题)
     class Meta:
         model = Cases
         fields = '__all__'

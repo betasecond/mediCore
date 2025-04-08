@@ -16,3 +16,6 @@ MODIFY COLUMN `data_template_id` BIGINT UNSIGNED NOT NULL COMMENT '模板外键'
 -- 3. 修改 data_template_tags_relative 中的 template_id 字段
 ALTER TABLE `data_template_tags_relative`
 MODIFY COLUMN `template_id` BIGINT UNSIGNED NOT NULL;
+# 修改cases关主键为BIGINT
+ALTER TABLE `cases`
+MODIFY COLUMN `id` BIGINT UNSIGNED NOT NULL ;
