@@ -1,4 +1,10 @@
 from django.db import models
+from utils.snowflake import Snowflake
+
+snowflake = Snowflake(datacenter_id=1, worker_id=1)
+
+def generate_snowflake_id():
+    return snowflake.get_id()
 
 class DataTemplateCategory(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -11,13 +17,13 @@ class DataTemplateCategory(models.Model):
         return self.name
 
 class DataTemplate(models.Model):
-    id = models.AutoField(primary_key=True)  # 自动增长的主键id
+    id = models.BigIntegerField(primary_key=True, default=generate_snowflake_id, editable=False)
     name = models.CharField(max_length=255, db_comment='模板名称')
     description = models.TextField(blank=True, null=True, db_comment='描述')
     # 指定 db_column 对应数据库中的字段名称
     category = models.ForeignKey(DataTemplateCategory, on_delete=models.CASCADE, db_column='category_id',
                                  verbose_name='类型外键引用')
-    used_n = models.IntegerField(db_comment='被使用次数')
+    used_n = models.IntegerField(default=1,db_comment='被使用次数')
 
     class Meta:
         db_table = 'data_template'
