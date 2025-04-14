@@ -1,6 +1,9 @@
 # patients/jwt_views.py
+from datetime import date
+
+from django.db.models import Case, When, IntegerField
 from django.db.models import Count
-from django.shortcuts import render
+from django.db.models.functions import ExtractYear
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -74,3 +77,24 @@ class GenderCountView(APIView):
         # 返回的数据格式 {1: 男性人数, 2: 女性人数}
         result = {gender['gender']: gender['count'] for gender in gender_count}
         return Response(result)
+
+
+class AgeDistributionView(APIView):
+    def get(self, request):
+        today = date.today()
+
+        # 提取出生年份并计算年龄（只取年份，忽略月日）
+        qs = Identity.objects.annotate(
+            age=today.year - ExtractYear('birth_date')
+        )
+
+        # 统计不同年龄段人数
+        age_distribution = qs.aggregate(
+            range_0_20=Count(Case(When(age__lte=20, then=1), output_field=IntegerField())),
+            range_21_40=Count(Case(When(age__gte=21, age__lte=40, then=1), output_field=IntegerField())),
+            range_41_60=Count(Case(When(age__gte=41, age__lte=60, then=1), output_field=IntegerField())),
+            range_61_80=Count(Case(When(age__gte=61, age__lte=80, then=1), output_field=IntegerField())),
+            range_81_plus=Count(Case(When(age__gte=81, then=1), output_field=IntegerField())),
+        )
+
+        return Response(age_distribution)
