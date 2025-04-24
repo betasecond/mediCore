@@ -26,7 +26,8 @@ from analysis.views import (
 )
 from data_templates.views import (
     DictionaryListCreateView, DictionaryDetailView, DataTemplatesListCreateView, DataTemplatesDetailView,
-    DataTemplateCategoryListCreateView, DataTemplateCategoryDetailView
+    DataTemplateCategoryListCreateView, DataTemplateCategoryDetailView,
+    dictionary_template_download, dictionary_import  # 添加新的视图函数导入
 )
 from records.views import (
     DataTableListCreateView, DataTableDetailView, ExaminationImagesListCreateView, ExaminationImagesDetailView,
@@ -62,10 +63,14 @@ api_patterns = [
     path('analysis-sheet/<int:pk>/', AnalysisSheetDetailView.as_view(), name='analysis-sheet-detail'),
     path('data-templates/', DataTemplatesListCreateView.as_view(), name='data-templates-list-create'),
     path('data-templates/<int:pk>/', DataTemplatesDetailView.as_view(), name='data-templates-detail'),
-path('categories/', DataTemplateCategoryListCreateView.as_view(), name='category-list-create'),
+    path('categories/', DataTemplateCategoryListCreateView.as_view(), name='category-list-create'),
     path('categories/<int:pk>/', DataTemplateCategoryDetailView.as_view(), name='category-detail'),
     path('dictionary/', DictionaryListCreateView.as_view(), name='dictionary-list-create'),
     path('dictionary/<int:pk>/', DictionaryDetailView.as_view(), name='dictionary-detail'),
+    # 添加词条CSV导入相关的路由
+    path('dictionary/import-template/', dictionary_template_download, name='dictionary_template_download'),
+    path('dictionary/import/', dictionary_import, name='dictionary_import'),
+    
     path('data-tables/', DataTableListCreateView.as_view(), name='data_table_list_create'),
     path('data-tables/<int:pk>/', DataTableDetailView.as_view(), name='data_table_detail'),
     path('examination-images/', ExaminationImagesListCreateView.as_view(), name='examination_images_list_create'),
@@ -97,8 +102,8 @@ path('categories/', DataTemplateCategoryListCreateView.as_view(), name='category
     path('clinical-info/<int:pk>/', ClinicalInfoDetailView.as_view(), name='clinical_info_detail'),
     path('identity/', IdentityListCreateView.as_view(), name='identity_list_create'),
     path('identity/<int:pk>/', IdentityDetailView.as_view(), name='identity_detail'),
-path('gender-count/', GenderCountView.as_view(), name='gender-count'),
-path('age-distribution/', AgeDistributionView.as_view(), name='age-distribution'),
+    path('gender-count/', GenderCountView.as_view(), name='gender-count'),
+    path('age-distribution/', AgeDistributionView.as_view(), name='age-distribution'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('swagger/?format=openapi', schema_view.without_ui(cache_timeout=0), name='schema-openapi'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
